@@ -6,6 +6,7 @@
 - We want self-documenting code
 - Efficiency in execution time and memory usage
 - Easy to test
+- Add any necessary comments to explain your reasoning while solving your problems
 
 ## Games
 
@@ -17,5 +18,5 @@ Just open a [new issue](https://github.com/creek12/test/issues/new) and we'll ge
 
 ## Once you are finished...
 
-- Upload your solutions to a public repository in GitHub or similar services.
-- Share your repository link with us by email to cllanos@pamer.edu.pe
+- Upload your solutions to a public repository in GitHub or similar services
+- Send your solution link to cllanos@pamer.edu.pe
