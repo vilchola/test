@@ -2,8 +2,8 @@
 
 ## What we need?
 
-- Refactor the terrible code: `app/gilded-rose.ts`
-- Don't change the test.
+- Refactor the terrible code: `app/gilded-rose.ts`. You can help yourself by running the tests `npm test`
+- Add the new "Conjured" Item described bellow
 
 ## Rules and new requirement
 
