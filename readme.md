@@ -10,7 +10,7 @@
 
 ## Games
 
-- [Don't permute](https://github.com/creek12/test/tree/master/game-01)
+- [Median of two sorted arrays](https://github.com/creek12/test/tree/master/game-01)
 - [Spaghetti code](https://github.com/creek12/test/tree/master/game-02)
 
 ## Any doubts?
