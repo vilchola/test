@@ -1,3 +1,17 @@
+/**
+ * Refactoring - change list:
+ * 1. Changed `for` statement by `for...of` statement (line: 35)
+ * 2. Created and import new file: constants.ts (line: 13)
+ * 3. Changed `item names` by constants (line: 36, 41, 47, 49, 50, 67, 68)
+ * 4. Changed by `increment operator` and `decrement operator` (line: 40, 47, 61, 67, 68)
+ * 5. Changed all `equals operator` by `strict equals operator` (line: 36, 41, 47, 49, 50, 67, 68)
+ * 6. New method: qualityUp (line: 60)
+ * 7. New method: qualityDown (line: 65)
+ * 8. Uncomment tests: conjured items
+ * 9. New line: added to test conjured items (line: 68)
+*/
+import { BACKSTAGE, BRIE, CONJURED, SULFURAS } from './constant';
+
 export class Item {
     name: string;
     sellIn: number;
@@ -18,52 +32,40 @@ export class GildedRose {
     }
 
     tick() {
-        for (let i = 0; i < this.items.length; i++) {
-            if (this.items[i].name != 'Aged Brie' && this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
-                if (this.items[i].quality > 0) {
-                    if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-                        this.items[i].quality = this.items[i].quality - 1
-                    }
-                }
-            } else {
-                if (this.items[i].quality < 50) {
-                    this.items[i].quality = this.items[i].quality + 1
-                    if (this.items[i].name == 'Backstage passes to a TAFKAL80ETC concert') {
-                        if (this.items[i].sellIn < 11) {
-                            if (this.items[i].quality < 50) {
-                                this.items[i].quality = this.items[i].quality + 1
-                            }
-                        }
-                        if (this.items[i].sellIn < 6) {
-                            if (this.items[i].quality < 50) {
-                                this.items[i].quality = this.items[i].quality + 1
-                            }
-                        }
+        for (const item of this.items) {
+            if (item.name !== BRIE && item.name !== BACKSTAGE)
+                this.qualityDown(item);
+            else {
+                if (item.quality < 50) {
+                    item.quality++;
+                    if (item.name === BACKSTAGE) {
+                        if (item.sellIn < 11) this.qualityUp(item);
+                        if (item.sellIn < 6) this.qualityUp(item);
                     }
                 }
             }
-            if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-                this.items[i].sellIn = this.items[i].sellIn - 1;
-            }
-            if (this.items[i].sellIn < 0) {
-                if (this.items[i].name != 'Aged Brie') {
-                    if (this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
-                        if (this.items[i].quality > 0) {
-                            if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-                                this.items[i].quality = this.items[i].quality - 1
-                            }
-                        }
-                    } else {
-                        this.items[i].quality = this.items[i].quality - this.items[i].quality
-                    }
-                } else {
-                    if (this.items[i].quality < 50) {
-                        this.items[i].quality = this.items[i].quality + 1
-                    }
-                }
+            if (item.name !== SULFURAS) item.sellIn--;
+            if (item.sellIn < 0) {
+                if (item.name !== BRIE) {
+                    if (item.name !== BACKSTAGE) this.qualityDown(item);
+                    else item.quality = item.quality - item.quality;
+                } else this.qualityUp(item);
             }
         }
 
         return this.items;
+    }
+
+    /** method to increment quality of item */
+    qualityUp(item: Item): void {
+        if (item.quality < 50) item.quality++;
+    }
+
+    /** method to decrement quality of item */
+    qualityDown(item: Item): void {
+        if (item.quality > 0) {
+            if (item.name !== SULFURAS) item.quality--;
+            if (item.name === CONJURED) item.quality--;
+        }
     }
 }
